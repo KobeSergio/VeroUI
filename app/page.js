@@ -1,19 +1,11 @@
 "use client";
 
+import Link from "next/link";
 import Image from "next/image";
 import React, { useRef } from "react";
 import Marquee from "react-fast-marquee";
 import { Carousel } from "@material-tailwind/react";
-import { Parallax, ParallaxLayer, IParallax } from "@react-spring/parallax";
-
-// Create a custom button component
-function CustomCarouselButton({ children, onClick }) {
-  return (
-    <button className="custom-carousel-button" onClick={onClick}>
-      {children}
-    </button>
-  );
-}
+import { Parallax, ParallaxLayer } from "@react-spring/parallax";
 
 export default function Home() {
   const parallax = useRef();
@@ -21,12 +13,13 @@ export default function Home() {
   return (
     <div className="w-full h-full" style={{ top: "0", left: "0" }}>
       <Parallax ref={parallax} pages={5}>
+
         {/* Hero Section */}
         <ParallaxLayer offset={0} speed={0}>
-          <div className="w-full h-full bg-white"></div>
+          <div className="w-full h-full bg-gradient-to-b from-white via-yellow-50 to-yellow-50"></div>
         </ParallaxLayer>
         <ParallaxLayer offset={0}>
-          <div className="w-full h-full flex flex-col items-center mt-20">
+          <div className="w-full h-full flex flex-col items-center mt-16">
             <h1 className="font-montserrat font-extrabold text-[50px] text-center text-black">
               Equal Perspectives
             </h1>
@@ -36,13 +29,13 @@ export default function Home() {
           </div>
         </ParallaxLayer>
         <ParallaxLayer offset={0} speed={-0.33}>
-          <div className="w-full h-[700px] bg-[url('/assets/top.png')] bg-contain bg-no-repeat bg-bottom"></div>
+          <div className="w-full h-full bg-[url('/assets/top.png')] bg-contain bg-no-repeat bg-bottom"></div>
         </ParallaxLayer>
         <ParallaxLayer offset={0} speed={-0.13}>
           <div className="w-full h-full bg-[url('/assets/middle1.png')] bg-contain bg-no-repeat bg-bottom"></div>
         </ParallaxLayer>
         <ParallaxLayer offset={0} speed={0}>
-          <div className="w-full min-h-full bg-[url('/assets/bottom.png')] bg-contain bg-no-repeat bg-bottom"></div>
+          <div className="w-full h-full bg-[url('/assets/bottom.png')] bg-contain bg-no-repeat bg-bottom"></div>
         </ParallaxLayer>
         <ParallaxLayer offset={0.9} speed={0}>
           <div className="w-full h-12 bg-blue"></div>
@@ -55,11 +48,11 @@ export default function Home() {
 
         {/* About the Project */}
         <ParallaxLayer offset={1} speed={0}>
-          <div className="w-full h-full bg-white"></div>
+          <div className="w-full h-full bg-gradient-to-b from-yellow-100 via-yellow-100 to-blue-50"></div>
         </ParallaxLayer>
         <ParallaxLayer offset={1} speed={0.8}>
-          <div className="w-[10%] h-[20%] rounded-full block ml-[85%] bg-[#FFD966] opacity-20" />
-          <div className="w-[5%] h-[10%] rounded-full block ml-[80%] bg-[#FFD966] opacity-20" />
+          <div className="w-[10%] h-[20%] bg-[url('/assets/male-symbol.png')] bg-contain bg-no-repeat opacity-5 block ml-[85%]"/>
+          <div className="w-[5%] h-[10%] bg-[url('/assets/male-symbol.png')] bg-contain bg-no-repeat opacity-5 block ml-[80%] -rotate-90" />
         </ParallaxLayer>
         <ParallaxLayer
           offset={1}
@@ -93,21 +86,21 @@ export default function Home() {
           </div>
         </ParallaxLayer>
         <ParallaxLayer offset={1.75} speed={0.5}>
-          <div className="w-[10%] h-[20%] rounded-full block ml-[70%] bg-[#FFD966] opacity-10" />
-          <div className="w-[5%] h-[10%] rounded-full block ml-[40%] bg-[#FFD966] opacity-10" />
+          <div className="w-[10%] h-[20%] bg-[url('/assets/male-symbol.png')] bg-contain bg-no-repeat opacity-5 block ml-[70%] rotate-180"/>
+          <div className="w-[5%] h-[10%] bg-[url('/assets/male-symbol.png')] bg-contain bg-no-repeat opacity-5 block ml-[40%]"/>
         </ParallaxLayer>
         <ParallaxLayer offset={1} speed={0.2}>
-          <div className="w-[10%] h-[20%] rounded-full block ml-[10%] bg-[#FFD966] opacity-20" />
-          <div className="w-[5%] h-[10%] rounded-full block ml-[70%] bg-[#FFD966] opacity-20" />
+          <div className="w-[10%] h-[20%] bg-[url('/assets/male-symbol.png')] bg-contain bg-no-repeat opacity-5 block ml-[10%] -rotate-45"/>
+          <div className="w-[5%] h-[10%] bg-[url('/assets/male-symbol.png')] bg-contain bg-no-repeat opacity-5 block ml-[70%]"/>
         </ParallaxLayer>
 
         {/* Significance of the Project */}
         <ParallaxLayer offset={2} speed={0}>
-          <div className="w-full h-full bg-white"></div>
+          <div className="w-full h-full bg-gradient-to-b from-blue-50 via-blue-100 to-purple-50"></div>
         </ParallaxLayer>
         <ParallaxLayer offset={2} speed={0.8}>
-          <div className="w-[10%] h-[20%] rounded-full block ml-[45%] bg-[#2E89E4] opacity-20" />
-          <div className="w-[5%] h-[10%] rounded-full block ml-[40%] bg-[#2E89E4] opacity-20" />
+          <div className="w-[10%] h-[20%] bg-[url('/assets/male-symbol.png')] bg-contain bg-no-repeat opacity-5 block ml-[45%]"/>
+          <div className="w-[5%] h-[10%] bg-[url('/assets/male-symbol.png')] bg-contain bg-no-repeat opacity-5 block ml-[40%] -rotate-45"/>
         </ParallaxLayer>
         <ParallaxLayer
           offset={2}
@@ -170,24 +163,24 @@ export default function Home() {
           </div>
         </ParallaxLayer>
         <ParallaxLayer offset={2.75} speed={0.5}>
-          <div className="w-[10%] h-[20%] rounded-full block ml-[30%] bg-[#2E89E4] opacity-10" />
-          <div className="w-[5%] h-[10%] rounded-full block ml-[40%] bg-[#2E89E4] opacity-10" />
+          <div className="w-[10%] h-[20%] bg-[url('/assets/male-symbol.png')] bg-contain bg-no-repeat opacity-5 block ml-[30%] rotate-180"/>
+          <div className="w-[5%] h-[10%] bg-[url('/assets/male-symbol.png')] bg-contain bg-no-repeat opacity-5 block ml-[40%] "/>
         </ParallaxLayer>
         <ParallaxLayer offset={2} speed={0.2}>
-          <div className="w-[10%] h-[20%] rounded-full block ml-[10%] bg-[#2E89E4] opacity-20" />
-          <div className="w-[5%] h-[10%] rounded-full block ml-[70%] bg-[#2E89E4] opacity-20" />
+          <div className="w-[10%] h-[20%] bg-[url('/assets/male-symbol.png')] bg-contain bg-no-repeat opacity-5 block ml-[10%] -rotate-90"/>
+          <div className="w-[5%] h-[10%] bg-[url('/assets/male-symbol.png')] bg-contain bg-no-repeat opacity-5 block ml-[70%]"/>
         </ParallaxLayer>
 
         {/* Banner & Submit Post Button*/}
         <ParallaxLayer offset={3} speed={0}>
-          <div className="w-full h-full"></div>
+          <div className="w-full h-full bg-gradient-to-b from-purple-50 via-purple-100 to-green-50"></div>
         </ParallaxLayer>
-        <ParallaxLayer offset={3.9} speed={0.8}>
-          <div className="w-[10%] h-[20%] rounded-full block ml-[45%] bg-[#2E89E4] opacity-20" />
-          <div className="w-[5%] h-[10%] rounded-full block ml-[40%] bg-[#2E89E4] opacity-20" />
+        <ParallaxLayer offset={3.7} speed={0.8}>
+          <div className="w-[10%] h-[20%] bg-[url('/assets/male-symbol.png')] bg-contain bg-no-repeat opacity-5 block ml-[45%] -rotate-3"/>
+          <div className="w-[5%] h-[10%] bg-[url('/assets/male-symbol.png')] bg-contain bg-no-repeat opacity-5 block ml-[40%] rotate-180"/>
         </ParallaxLayer>
         <ParallaxLayer offset={3} speed={0.45} className="z-40">
-          <Carousel loop="true" autoplay="true" className="h-[70vh] ">
+          <Carousel loop="true" autoplay="true" className="h-[70vh]">
             <div className="w-full h-full bg-[url('/assets/4.jpg')] bg-contain bg-no-repeat bg-bottom"></div>
             <div className="w-full h-full bg-[url('/assets/1.jpg')] bg-contain bg-no-repeat bg-bottom"></div>
             <div className="w-full h-full bg-[url('/assets/2.jpg')] bg-contain bg-no-repeat bg-bottom"></div>
@@ -204,7 +197,7 @@ export default function Home() {
           </div>
         </ParallaxLayer>
 
-        <ParallaxLayer offset={2.8} speed={-0.2}>
+        <ParallaxLayer offset={2.8} speed={-0}>
           <div className="bg-black bg-opacity-10 rounded-full ml-[5%] w-fit max-h-fit p-16 flex flex-col justify-center items-center">
             <button
               type="button"
@@ -216,23 +209,23 @@ export default function Home() {
         </ParallaxLayer>
 
         {/* Partners */}
-        <ParallaxLayer offset={3.9} speed={0.45}>
-          <div className="w-full h-full"></div>
+        <ParallaxLayer offset={4} speed={0}>
+          <div className="w-full h-full bg-gradient-to-b from-green-50 via-green-100 to-green-200"></div>
         </ParallaxLayer>
         <ParallaxLayer offset={3.1} speed={-0}>
-          <div className="w-[10%] h-[20%] rounded-full block ml-[60%] bg-[#7163DE] opacity-20" />
-          <div className="w-[5%] h-[10%] rounded-full block ml-[90%] bg-[#7163DE] opacity-20" />
+          <div className="w-[10%] h-[20%] bg-[url('/assets/male-symbol.png')] bg-contain bg-no-repeat opacity-5 ml-[60%] rotate-45" />
+          <div className="w-[5%] h-[10%] bg-[url('/assets/male-symbol.png')] bg-contain bg-no-repeat opacity-5 ml-[90%] " />
         </ParallaxLayer>
         <ParallaxLayer offset={3.8} speed={0.45}>
-          <div className="w-[10%] h-[20%] rounded-full block ml-[90%] bg-[#2E89E4] opacity-20" />
-          <div className="w-[5%] h-[10%] rounded-full block ml-[30%] bg-[#2E89E4] opacity-20" />
+          <div className="w-[10%] h-[20%] bg-[url('/assets/male-symbol.png')] bg-contain bg-no-repeat opacity-5 ml-[90%] " />
+          <div className="w-[5%] h-[10%] bg-[url('/assets/male-symbol.png')] bg-contain bg-no-repeat opacity-5 ml-[30%] rotate-6" />
         </ParallaxLayer>
-        {/* <ParallaxLayer offset={4} speed={0.8}>
-          <div className="w-[10%] h-[20%] rounded-full block ml-[85%] bg-[#FFD966] opacity-20" />
-          <div className="w-[5%] h-[10%] rounded-full block ml-[80%] bg-[#FFD966] opacity-20" />
-        </ParallaxLayer> */}
-        <ParallaxLayer offset={3.9} speed={0.45} factor={1 / 2}>
-          <div className="flex flex-col pt-24">
+        <ParallaxLayer
+          offset={3.9}
+          speed={0}
+          sticky={{ start: 3.9, end: 1 }}
+        >
+          <div className="bg-black bg-opacity-10 rounded-lg py-4 flex flex-col justify-center items-center">
             <h1 className="font-montserrat font-extrabold text-center text-3xl text-black pb-4">
               Partners
             </h1>
@@ -348,19 +341,26 @@ export default function Home() {
 
         {/* Project Creators */}
         <ParallaxLayer offset={4.4} speed={0.8}>
-          <div className="w-[10%] h-[20%] rounded-full block ml-[85%] bg-[#AB6B4F] opacity-20" />
-          <div className="w-[5%] h-[10%] rounded-full block ml-[80%] bg-[#8FAADC] opacity-20" />
+          <div className="w-[10%] h-[20%] bg-[url('/assets/male-symbol.png')] bg-contain bg-no-repeat opacity-5 block ml-[85%] rotate-90"/>
+          <div className="w-[5%] h-[10%] bg-[url('/assets/male-symbol.png')] bg-contain bg-no-repeat opacity-5 block ml-[80%] rotate-180"/>
         </ParallaxLayer>
-        <ParallaxLayer
-          offset={4.2}
-          speed={-0.1}
-          factor={1 / 2}
-          className="flex flex-col gap-2 justify-center items-center"
-        >
+        <ParallaxLayer offset={4.2} speed={0.8}>
+        <div className="w-[5%] h-[10%] bg-[url('/assets/male-symbol.png')] bg-contain bg-no-repeat opacity-5 block ml-[14%] -rotate-90"/>
+          <div className="w-[10%] h-[20%] bg-[url('/assets/male-symbol.png')] bg-contain bg-no-repeat opacity-5 block ml-[5%]"/>
+          
+        </ParallaxLayer>
+        <ParallaxLayer offset={4.3} speed={0}>
           <h1 className="font-montserrat font-extrabold text-center text-3xl text-black pb-4">
             Project Creators
           </h1>
-          <div className="w-[350px] h-[300px] flex flex-col justify-center items-center bg-[#AB6B4F] rounded-lg p-6">
+        </ParallaxLayer>
+        <ParallaxLayer
+          offset={4.3}
+          speed={-0.1}
+          factor={1 / 2}
+          className="flex pt-12 justify-center items-center"
+        >
+          <div className="w-[300px] h-[300px] flex flex-col justify-center items-center bg-[#AB6B4F] rounded-lg p-6">
             <Image
               src={"/assets/nica_.png"}
               width={100}
@@ -374,12 +374,12 @@ export default function Home() {
           </div>
         </ParallaxLayer>
         <ParallaxLayer
-          offset={4.2}
+          offset={4.3}
           speed={0.2}
           factor={1 / 2}
           className="w-full flex flex-row justify-around"
         >
-          <div className="w-[350px] h-[300px] flex flex-col justify-center items-center bg-[#8FAADC] rounded-lg p-6">
+          <div className="w-[300px] h-[300px] flex flex-col justify-center items-center bg-[#8FAADC] rounded-lg p-6">
             <Image
               src={"/assets/vergara_.png"}
               width={100}
@@ -391,7 +391,7 @@ export default function Home() {
               Krishna Vergara
             </h4>
           </div>
-          <div className="w-[350px] h-[300px] flex flex-col justify-center items-center bg-[#A9D18E] rounded-lg p-6">
+          <div className="w-[300px] h-[300px] flex flex-col justify-center items-center bg-[#A9D18E] rounded-lg p-6">
             <Image
               src={"/assets/klarenz_.png"}
               width={100}
@@ -405,14 +405,71 @@ export default function Home() {
           </div>
         </ParallaxLayer>
         <ParallaxLayer offset={4} speed={0.5}>
-          <div className="w-[10%] h-[20%] rounded-full block ml-[70%] bg-[#FFD966] opacity-10" />
-          <div className="w-[5%] h-[10%] rounded-full block ml-[40%] bg-[#8FAADC] opacity-10" />
+          <div className="w-[10%] h-[20%] bg-[url('/assets/male-symbol.png')] bg-contain bg-no-repeat opacity-5 block ml-[60%] rotate-180"/>
+          <div className="w-[5%] h-[10%] ml-[40%] " />
         </ParallaxLayer>
         <ParallaxLayer offset={4} speed={0.2}>
-          <div className="w-[10%] h-[20%] rounded-full block ml-[10%] bg-[#A9D18E] opacity-20" />
-          <div className="w-[5%] h-[10%] rounded-full block ml-[70%] bg-[#FFD966] opacity-20" />
+          <div className="w-[10%] h-[20%] bg-[url('/assets/male-symbol.png')] bg-contain bg-no-repeat opacity-5 block ml-[10%] " />
+          <div className="w-[5%] h-[10%] bg-[url('/assets/male-symbol.png')] bg-contain bg-no-repeat opacity-5 block ml-[70%] rotate-45" />
         </ParallaxLayer>
-        <ParallaxLayer></ParallaxLayer>
+
+        {/* Footer */}
+        <ParallaxLayer offset={5.1} speed={-0.2}>
+          <footer className="flex flex-col pb-6 px-6 lg:px-12">
+            <hr className="bg-white h-1 rounded-sm "></hr>
+            <div className="flex flex-row flex-wrap justify-center lg:justify-between max-lg:gap-2 mt-4">
+              <h4 className="font-montserrat font-semibold text-sm text-white text-center lg:text-start">
+                Copyright 2023 © Bonafide Development Co.
+              </h4>
+              <div className="flex flex-row gap-5 items-center">
+                <Link
+                  href={"https://www.facebook.com/CvSUGADResourceCenter"}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <Image
+                    src={"/assets/socials/facebook.png"}
+                    width={20}
+                    height={20}
+                    alt={"facebook logo"}
+                  />
+                </Link>
+                <Link href={""} target="_blank" rel="noopener noreferrer">
+                  <Image
+                    src={"/assets/socials/discord.png"}
+                    width={20}
+                    height={20}
+                    alt={"discord logo"}
+                  />
+                </Link>
+                <Link href={""} target="_blank" rel="noopener noreferrer">
+                  <Image
+                    src={"/assets/socials/twitter.png"}
+                    width={20}
+                    height={20}
+                    alt={"twitter logo"}
+                  />
+                </Link>
+                <Link href={""} target="_blank" rel="noopener noreferrer">
+                  <Image
+                    src={"/assets/socials/google.png"}
+                    width={20}
+                    height={20}
+                    alt={"google logo"}
+                  />
+                </Link>
+                <Link href={""} target="_blank" rel="noopener noreferrer">
+                  <Image
+                    src={"/assets/socials/linked_in.png"}
+                    width={20}
+                    height={20}
+                    alt={"linkedin logo"}
+                  />
+                </Link>
+              </div>
+            </div>
+          </footer>
+        </ParallaxLayer>
       </Parallax>
     </div>
   );
