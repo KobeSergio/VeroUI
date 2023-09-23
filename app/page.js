@@ -3,17 +3,18 @@
 import Link from "next/link";
 import Image from "next/image";
 import React, { useRef } from "react";
+import { useRouter } from "next/navigation";
 import Marquee from "react-fast-marquee";
 import { Carousel } from "@material-tailwind/react";
 import { Parallax, ParallaxLayer } from "@react-spring/parallax";
 
 export default function Home() {
   const parallax = useRef();
+  const router = useRouter();
 
   return (
-    <div className="w-full h-full" style={{ top: "0", left: "0" }}>
+    <div className="w-full h-full top-0 left-0">
       <Parallax ref={parallax} pages={5}>
-
         {/* Hero Section */}
         <ParallaxLayer offset={0} speed={0}>
           <div className="w-full h-full bg-gradient-to-b from-white via-yellow-50 to-yellow-50"></div>
@@ -51,7 +52,7 @@ export default function Home() {
           <div className="w-full h-full bg-gradient-to-b from-yellow-100 via-yellow-100 to-blue-50"></div>
         </ParallaxLayer>
         <ParallaxLayer offset={1} speed={0.8}>
-          <div className="w-[10%] h-[20%] bg-[url('/assets/male-symbol.png')] bg-contain bg-no-repeat opacity-5 block ml-[85%]"/>
+          <div className="w-[10%] h-[20%] bg-[url('/assets/male-symbol.png')] bg-contain bg-no-repeat opacity-5 block ml-[85%]" />
           <div className="w-[5%] h-[10%] bg-[url('/assets/male-symbol.png')] bg-contain bg-no-repeat opacity-5 block ml-[80%] -rotate-90" />
         </ParallaxLayer>
         <ParallaxLayer
@@ -86,12 +87,12 @@ export default function Home() {
           </div>
         </ParallaxLayer>
         <ParallaxLayer offset={1.75} speed={0.5}>
-          <div className="w-[10%] h-[20%] bg-[url('/assets/male-symbol.png')] bg-contain bg-no-repeat opacity-5 block ml-[70%] rotate-180"/>
-          <div className="w-[5%] h-[10%] bg-[url('/assets/male-symbol.png')] bg-contain bg-no-repeat opacity-5 block ml-[40%]"/>
+          <div className="w-[10%] h-[20%] bg-[url('/assets/male-symbol.png')] bg-contain bg-no-repeat opacity-5 block ml-[70%] rotate-180" />
+          <div className="w-[5%] h-[10%] bg-[url('/assets/male-symbol.png')] bg-contain bg-no-repeat opacity-5 block ml-[40%]" />
         </ParallaxLayer>
         <ParallaxLayer offset={1} speed={0.2}>
-          <div className="w-[10%] h-[20%] bg-[url('/assets/male-symbol.png')] bg-contain bg-no-repeat opacity-5 block ml-[10%] -rotate-45"/>
-          <div className="w-[5%] h-[10%] bg-[url('/assets/male-symbol.png')] bg-contain bg-no-repeat opacity-5 block ml-[70%]"/>
+          <div className="w-[10%] h-[20%] bg-[url('/assets/male-symbol.png')] bg-contain bg-no-repeat opacity-5 block ml-[10%] -rotate-45" />
+          <div className="w-[5%] h-[10%] bg-[url('/assets/male-symbol.png')] bg-contain bg-no-repeat opacity-5 block ml-[70%]" />
         </ParallaxLayer>
 
         {/* Significance of the Project */}
@@ -99,8 +100,8 @@ export default function Home() {
           <div className="w-full h-full bg-gradient-to-b from-blue-50 via-blue-100 to-purple-50"></div>
         </ParallaxLayer>
         <ParallaxLayer offset={2} speed={0.8}>
-          <div className="w-[10%] h-[20%] bg-[url('/assets/male-symbol.png')] bg-contain bg-no-repeat opacity-5 block ml-[45%]"/>
-          <div className="w-[5%] h-[10%] bg-[url('/assets/male-symbol.png')] bg-contain bg-no-repeat opacity-5 block ml-[40%] -rotate-45"/>
+          <div className="w-[10%] h-[20%] bg-[url('/assets/male-symbol.png')] bg-contain bg-no-repeat opacity-5 block ml-[45%]" />
+          <div className="w-[5%] h-[10%] bg-[url('/assets/male-symbol.png')] bg-contain bg-no-repeat opacity-5 block ml-[40%] -rotate-45" />
         </ParallaxLayer>
         <ParallaxLayer
           offset={2}
@@ -163,12 +164,12 @@ export default function Home() {
           </div>
         </ParallaxLayer>
         <ParallaxLayer offset={2.75} speed={0.5}>
-          <div className="w-[10%] h-[20%] bg-[url('/assets/male-symbol.png')] bg-contain bg-no-repeat opacity-5 block ml-[30%] rotate-180"/>
-          <div className="w-[5%] h-[10%] bg-[url('/assets/male-symbol.png')] bg-contain bg-no-repeat opacity-5 block ml-[40%] "/>
+          <div className="w-[10%] h-[20%] bg-[url('/assets/male-symbol.png')] bg-contain bg-no-repeat opacity-5 block ml-[30%] rotate-180" />
+          <div className="w-[5%] h-[10%] bg-[url('/assets/male-symbol.png')] bg-contain bg-no-repeat opacity-5 block ml-[40%] " />
         </ParallaxLayer>
         <ParallaxLayer offset={2} speed={0.2}>
-          <div className="w-[10%] h-[20%] bg-[url('/assets/male-symbol.png')] bg-contain bg-no-repeat opacity-5 block ml-[10%] -rotate-90"/>
-          <div className="w-[5%] h-[10%] bg-[url('/assets/male-symbol.png')] bg-contain bg-no-repeat opacity-5 block ml-[70%]"/>
+          <div className="w-[10%] h-[20%] bg-[url('/assets/male-symbol.png')] bg-contain bg-no-repeat opacity-5 block ml-[10%] -rotate-90" />
+          <div className="w-[5%] h-[10%] bg-[url('/assets/male-symbol.png')] bg-contain bg-no-repeat opacity-5 block ml-[70%]" />
         </ParallaxLayer>
 
         {/* Banner & Submit Post Button*/}
@@ -176,8 +177,8 @@ export default function Home() {
           <div className="w-full h-full bg-gradient-to-b from-purple-50 via-purple-100 to-green-50"></div>
         </ParallaxLayer>
         <ParallaxLayer offset={3.7} speed={0.8}>
-          <div className="w-[10%] h-[20%] bg-[url('/assets/male-symbol.png')] bg-contain bg-no-repeat opacity-5 block ml-[45%] -rotate-3"/>
-          <div className="w-[5%] h-[10%] bg-[url('/assets/male-symbol.png')] bg-contain bg-no-repeat opacity-5 block ml-[40%] rotate-180"/>
+          <div className="w-[10%] h-[20%] bg-[url('/assets/male-symbol.png')] bg-contain bg-no-repeat opacity-5 block ml-[45%] -rotate-3" />
+          <div className="w-[5%] h-[10%] bg-[url('/assets/male-symbol.png')] bg-contain bg-no-repeat opacity-5 block ml-[40%] rotate-180" />
         </ParallaxLayer>
         <ParallaxLayer offset={3} speed={0.45} className="z-40">
           <Carousel loop="true" autoplay="true" className="h-[70vh]">
@@ -186,13 +187,14 @@ export default function Home() {
             <div className="w-full h-full bg-[url('/assets/2.jpg')] bg-contain bg-no-repeat bg-bottom"></div>
           </Carousel>
         </ParallaxLayer>
-        <ParallaxLayer offset={3.85} speed={0.5}>
+        <ParallaxLayer offset={3.85} speed={0.5} className="z-40">
           <div className="flex justify-center items-center">
             <button
               type="button"
               className="w-fit flex bg-[#7163DE] text-white py-5 px-8 justify-center rounded-full font-montserrat text-lg font-semibold cursor-pointer mb-4"
+              onClick={() => router.push("/discussion-forum")}
             >
-              Submit a Post
+              View Discussion Forum
             </button>
           </div>
         </ParallaxLayer>
@@ -220,11 +222,7 @@ export default function Home() {
           <div className="w-[10%] h-[20%] bg-[url('/assets/male-symbol.png')] bg-contain bg-no-repeat opacity-5 ml-[90%] " />
           <div className="w-[5%] h-[10%] bg-[url('/assets/male-symbol.png')] bg-contain bg-no-repeat opacity-5 ml-[30%] rotate-6" />
         </ParallaxLayer>
-        <ParallaxLayer
-          offset={3.9}
-          speed={0}
-          sticky={{ start: 3.9, end: 1 }}
-        >
+        <ParallaxLayer offset={3.9} speed={0} sticky={{ start: 3.9, end: 1 }}>
           <div className="bg-black bg-opacity-10 rounded-lg py-4 flex flex-col justify-center items-center">
             <h1 className="font-montserrat font-extrabold text-center text-3xl text-black pb-4">
               Partners
@@ -341,13 +339,12 @@ export default function Home() {
 
         {/* Project Creators */}
         <ParallaxLayer offset={4.4} speed={0.8}>
-          <div className="w-[10%] h-[20%] bg-[url('/assets/male-symbol.png')] bg-contain bg-no-repeat opacity-5 block ml-[85%] rotate-90"/>
-          <div className="w-[5%] h-[10%] bg-[url('/assets/male-symbol.png')] bg-contain bg-no-repeat opacity-5 block ml-[80%] rotate-180"/>
+          <div className="w-[10%] h-[20%] bg-[url('/assets/male-symbol.png')] bg-contain bg-no-repeat opacity-5 block ml-[85%] rotate-90" />
+          <div className="w-[5%] h-[10%] bg-[url('/assets/male-symbol.png')] bg-contain bg-no-repeat opacity-5 block ml-[80%] rotate-180" />
         </ParallaxLayer>
         <ParallaxLayer offset={4.2} speed={0.8}>
-        <div className="w-[5%] h-[10%] bg-[url('/assets/male-symbol.png')] bg-contain bg-no-repeat opacity-5 block ml-[14%] -rotate-90"/>
-          <div className="w-[10%] h-[20%] bg-[url('/assets/male-symbol.png')] bg-contain bg-no-repeat opacity-5 block ml-[5%]"/>
-          
+          <div className="w-[5%] h-[10%] bg-[url('/assets/male-symbol.png')] bg-contain bg-no-repeat opacity-5 block ml-[14%] -rotate-90" />
+          <div className="w-[10%] h-[20%] bg-[url('/assets/male-symbol.png')] bg-contain bg-no-repeat opacity-5 block ml-[5%]" />
         </ParallaxLayer>
         <ParallaxLayer offset={4.3} speed={0}>
           <h1 className="font-montserrat font-extrabold text-center text-3xl text-black pb-4">
@@ -361,13 +358,8 @@ export default function Home() {
           className="flex pt-12 justify-center items-center"
         >
           <div className="w-[300px] h-[300px] flex flex-col justify-center items-center bg-[#AB6B4F] rounded-lg p-6">
-            <Image
-              src={"/assets/nica_.png"}
-              width={100}
-              height={100}
-              alt=""
-              className="w-40"
-            />
+            <div className="w-40 h-40 bg-[url('/assets/silva.jpg')] bg-cover bg-center bg-no-repeat rounded-full" />
+
             <h4 className="font-montserrat font-medium text-xl text-white pt-4">
               Veronica Silva
             </h4>
@@ -380,32 +372,20 @@ export default function Home() {
           className="w-full flex flex-row justify-around"
         >
           <div className="w-[300px] h-[300px] flex flex-col justify-center items-center bg-[#8FAADC] rounded-lg p-6">
-            <Image
-              src={"/assets/vergara_.png"}
-              width={100}
-              height={100}
-              alt=""
-              className="w-40"
-            />
+            <div className="w-40 h-40 bg-[url('/assets/vergara.png')] bg-cover bg-center bg-no-repeat rounded-full" />
             <h4 className="font-montserrat font-medium text-xl text-white pt-4">
               Krishna Vergara
             </h4>
           </div>
           <div className="w-[300px] h-[300px] flex flex-col justify-center items-center bg-[#A9D18E] rounded-lg p-6">
-            <Image
-              src={"/assets/klarenz_.png"}
-              width={100}
-              height={100}
-              alt=""
-              className="w-40"
-            />
+          <div className="w-40 h-40 bg-[url('/assets/devera.png')] bg-cover bg-center bg-no-repeat rounded-full" />
             <h4 className="font-montserrat font-medium text-xl text-white pt-4">
               Matt Klarenz De Vera
             </h4>
           </div>
         </ParallaxLayer>
         <ParallaxLayer offset={4} speed={0.5}>
-          <div className="w-[10%] h-[20%] bg-[url('/assets/male-symbol.png')] bg-contain bg-no-repeat opacity-5 block ml-[60%] rotate-180"/>
+          <div className="w-[10%] h-[20%] bg-[url('/assets/male-symbol.png')] bg-contain bg-no-repeat opacity-5 block ml-[60%] rotate-180" />
           <div className="w-[5%] h-[10%] ml-[40%] " />
         </ParallaxLayer>
         <ParallaxLayer offset={4} speed={0.2}>
