@@ -1,109 +1,49 @@
 "use client";
 
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { BsArrowLeft } from "react-icons/bs";
 import { Parallax, ParallaxLayer } from "@react-spring/parallax";
 import PostCard from "../../components/PostCard";
 import ReactPaginate from "react-paginate";
 import { SubmitPostModal } from "../../components/SubmitPostModal";
+import { Post } from "../../types/Post";
+import Firebase from "../../lib/firebase";
+
+const firebase = new Firebase();
+
 export default function DiscussionForum() {
-  const parallax = useRef();
   const router = useRouter();
-  const posts = [
-    {
-      post_id: 1,
-      subject: "Lorem Ipsum Subject",
-      timestamp: "09/23/2023, 2:23 AM",
-      message:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniamer.",
-      comments: [
-        {
-          comment_id: 1,
-          comment_message:
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo cosequat.",
-          comment_timestamp: "09/23/2023, 2:23 AM",
-        },
-        {
-          comment_id: 2,
-          comment_message: "last comment",
-          comment_timestamp: "09/23/2023, 2:23 AM",
-        },
-        {
-          comment_id: 1,
-          comment_message: "first comment",
-          comment_timestamp: "09/23/2023, 2:23 AM",
-        },
-      ],
-    },
-    {
-      post_id: 1,
-      subject: "Sample",
-      timestamp: "09/23/2023, 2:23 AM",
-      message: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
-    },
-    {
-      post_id: 1,
-      subject: "Sample",
-      timestamp: "09/23/2023, 2:23 AM",
-      message: "Lorem ipsum",
-    },
-    {
-      post_id: 1,
-      subject: "Sample",
-      timestamp: "09/23/2023, 2:23 AM",
-      message: "Lorem ipsum",
-    },
-    {
-      post_id: 1,
-      subject: "Sample",
-      timestamp: "09/23/2023, 2:23 AM",
-      message: "Lorem ipsum",
-    },
-    {
-      post_id: 1,
-      subject: "Sample",
-      timestamp: "09/23/2023, 2:23 AM",
-      message: "Lorem ipsum",
-    },
-    {
-      post_id: 1,
-      subject: "Sample",
-      timestamp: "09/23/2023, 2:23 AM",
-      message: "Lorem ipsum",
-    },
-    {
-      post_id: 1,
-      subject: "Sample",
-      timestamp: "09/23/2023, 2:23 AM",
-      message: "Lorem ipsum",
-    },
-    {
-      post_id: 1,
-      subject: "Sample",
-      timestamp: "09/23/2023, 2:23 AM",
-      message: "Lorem ipsum",
-    },
-    {
-      post_id: 1,
-      subject: "Sample",
-      timestamp: "09/23/2023, 2:23 AM",
-      message: "Lorem ipsum",
-    },
-  ];
+
+  const [posts, setPosts] = useState<Post[]>([] as Post[]);
+
   // State variables for pagination
   const [currentPage, setCurrentPage] = useState(0);
-  const itemsPerPage = 3; // Change this value as needed
+  const [paginatedPosts, setPaginatedPosts] = useState<Post[]>([] as Post[]);
+  const [pageCount, setPageCount] = useState<number>(0);
 
-  // Calculate the start and end indices for the current page
-  const startIndex = currentPage * itemsPerPage;
-  const endIndex = startIndex + itemsPerPage;
+  useEffect(() => {
+    if (posts.length == 0) {
+      firebase
+        .getPosts()
+        .then((posts) => {
+          setPosts(posts);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
+  }, []);
 
-  // Slice the posts array to display only the current page's items
-  const paginatedPosts = posts.slice(startIndex, endIndex);
-
-  // Total number of pages
-  const pageCount = Math.ceil(posts.length / itemsPerPage);
+  useEffect(() => {
+    if (posts.length > 0) {
+      const itemsPerPage = 3; // Change this value as needed
+      const startIndex = currentPage * itemsPerPage;
+      const endIndex = startIndex + itemsPerPage;
+      setPaginatedPosts(posts.slice(startIndex, endIndex));
+      setPageCount(Math.ceil(posts.length / itemsPerPage));
+    }
+  }, [posts]);
 
   // Handle page change
   const handlePageChange = (selectedPage: any) => {
@@ -112,6 +52,7 @@ export default function DiscussionForum() {
 
   const [showPostModal, setShowPostModal] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+
   const handleSubmitPost = () => {
     setIsLoading(true);
     setTimeout(() => {
@@ -121,7 +62,7 @@ export default function DiscussionForum() {
   };
 
   return (
-    <Parallax ref={parallax} pages={1.5}>
+    <Parallax pages={1.5}>
       <ParallaxLayer offset={0} speed={0} factor={1.5}>
         <div className="w-full h-full bg-gradient-to-b from-white via-yellow-50 to-yellow-50"></div>
       </ParallaxLayer>
@@ -181,6 +122,7 @@ export default function DiscussionForum() {
           isOpen={showPostModal}
           setter={() => setShowPostModal(false)}
           onSubmit={handleSubmitPost}
+          setPosts={setPosts}
           isLoading={isLoading}
         />
         <div className="flex flex-col gap-4 px-24 py-6">
@@ -208,6 +150,8 @@ export default function DiscussionForum() {
             {paginatedPosts.map((post: any, index) => (
               <PostCard
                 key={index}
+                index={index}
+                setPosts={setPosts}
                 post_id={post.post_id}
                 subject={post.subject}
                 timestamp={post.timestamp}

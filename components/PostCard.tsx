@@ -1,19 +1,28 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Firebase from "../lib/firebase";
+import { PostComment } from "../types/Comment";
+import { Spinner } from "./Spinner";
+
+const firebase = new Firebase();
 
 export default function PostCard({
+  index,
   post_id,
   subject,
   timestamp,
   message,
   comments,
+  setPosts,
 }: {
-  post_id: number;
+  index: number;
+  post_id: string;
   subject: string;
   timestamp: string;
   message: string;
   comments: any[];
+  setPosts: any;
 }) {
   const colors = [
     "#F7D097",
@@ -32,7 +41,30 @@ export default function PostCard({
 
   const [bgColor, setBgColor] = useState("");
   const [seeMore, setSeeMore] = useState(false);
-  const randomColor = colors[Math.floor(Math.random() * colors.length)];
+  const [isLoading, setIsLoading] = useState(false);
+  const randomColor = colors[index % colors.length];
+
+  const [comment, setComment] = useState<string>("");
+
+  const onSubmitComment = async () => {
+    if (comment.length == 0) {
+      alert("Please fill out all fields.");
+      return;
+    }
+    setIsLoading(true);
+
+    const newComments: PostComment = {
+      comment_id: `${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
+      comment_message: comment,
+      comment_timestamp: new Date().toLocaleString(),
+    };
+
+    await firebase.addComment(post_id, newComments);
+    const posts = await firebase.getPosts();
+    setComment("");
+    setIsLoading(false);
+    setPosts(posts);
+  };
 
   const toggleSeeMore = () => {
     setSeeMore(!seeMore);
@@ -88,28 +120,39 @@ export default function PostCard({
                 </p>
               </div>
             )}
-            <a
-              className="font-montserrat font-semibold text-xs text-black mt-2 flex self-end cursor-pointer hover:underline"
-              onClick={toggleSeeMore}
-            >
-              {seeMore ? "See less" : "View other comments"}
-            </a>
+            {comments.length > 1 && (
+              <a
+                className="font-montserrat font-semibold text-xs text-black mt-2 flex self-end cursor-pointer hover:underline"
+                onClick={toggleSeeMore}
+              >
+                {seeMore ? "See less" : "View other comments"}
+              </a>
+            )}
           </>
         )}
         <form className="flex flex-row gap-1 mt-4">
           <input
             aria-label="comment"
             type="text"
+            value={comment}
+            onChange={(e) => setComment(e.target.value)}
             className="w-full bg-transparent outline-none border placeholder:text-white px-4 border-white/60 font-montserrat font-medium text-sm text-white rounded-full"
             placeholder="Write a comment"
             maxLength={150}
           />
           <button
             type="button"
+            onClick={onSubmitComment}
             className="w-fit bg-white px-4 py-2 rounded-full font-semibold text-sm font-montserrat"
             style={{ color: bgColor }}
           >
-            Comment
+            {isLoading ? (
+              <>
+                <Spinner />
+              </>
+            ) : (
+              <>Comment</>
+            )}
           </button>
         </form>
       </div>

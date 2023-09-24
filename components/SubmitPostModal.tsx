@@ -11,8 +11,42 @@ import {
   Textarea,
 } from "@material-tailwind/react";
 import { Spinner } from "./Spinner";
+import Firebase from "../lib/firebase";
+import { Post } from "../types/Post";
 
-export function SubmitPostModal({ isOpen, setter, onSubmit, isLoading }: any) {
+const firebase = new Firebase();
+
+export function SubmitPostModal({ isOpen, setter, setPosts }: any) {
+  const [isLoading, setIsLoading] = useState(false);
+
+  const [subject, setSubject] = useState("");
+  const [message, setMessage] = useState("");
+
+  const onSubmit = async () => {
+    if (subject.length == 0 || message.length == 0) {
+      alert("Please fill out all fields.");
+      return;
+    }
+    setIsLoading(true);
+    try {
+      const newPost: Post = {
+        post_id: "",
+        subject: subject,
+        message: message,
+        timestamp: new Date().toLocaleString(),
+        comments: [],
+      };
+      await firebase.createPost(newPost);
+      const posts = await firebase.getPosts();
+      setPosts(posts);
+
+      setIsLoading(false);
+      setter(false);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <>
       <Dialog open={isOpen} handler={setter}>
@@ -54,12 +88,14 @@ export function SubmitPostModal({ isOpen, setter, onSubmit, isLoading }: any) {
               crossOrigin={undefined}
               color="indigo"
               maxLength={50}
+              onChange={(e) => setSubject(e.target.value)}
             />
             <Textarea
               label="Message"
               color="indigo"
               className="font-montserrat font-medium"
               maxLength={150}
+              onChange={(e) => setMessage(e.target.value)}
             />
           </div>
         </DialogBody>
