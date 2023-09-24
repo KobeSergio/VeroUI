@@ -43,7 +43,7 @@ export default function DiscussionForum() {
       setPaginatedPosts(posts.slice(startIndex, endIndex));
       setPageCount(Math.ceil(posts.length / itemsPerPage));
     }
-  }, [posts]);
+  }, [currentPage, posts]);
 
   // Handle page change
   const handlePageChange = (selectedPage: any) => {
