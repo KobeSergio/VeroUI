@@ -9,12 +9,11 @@ import { Carousel } from "@material-tailwind/react";
 import { Parallax, ParallaxLayer } from "@react-spring/parallax";
 
 export default function Home() {
-  const parallax = useRef();
   const router = useRouter();
 
   return (
     <div className="w-full h-full top-0 left-0">
-      <Parallax ref={parallax} pages={5}>
+      <Parallax  pages={5}>
         {/* Hero Section */}
         <ParallaxLayer offset={0} speed={0}>
           <div className="w-full h-full bg-gradient-to-b from-white via-yellow-50 to-yellow-50"></div>
@@ -204,6 +203,7 @@ export default function Home() {
             <button
               type="button"
               className="w-fit flex bg-[#2E89E4] text-white py-5 px-8 justify-center rounded-full font-montserrat text-lg font-semibold cursor-pointer mb-4"
+              onClick={() => router.push("/project")}       
             >
               View the Project
             </button>
