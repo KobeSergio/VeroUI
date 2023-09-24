@@ -143,7 +143,7 @@ export default function PostCard({
           <button
             type="button"
             onClick={onSubmitComment}
-            className="w-fit bg-white px-4 py-2 rounded-full font-semibold text-sm font-montserrat"
+            className="w-fit h-full bg-white px-4 py-2 rounded-full font-semibold text-sm font-montserrat"
             style={{ color: bgColor }}
           >
             {isLoading ? (
