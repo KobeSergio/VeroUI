@@ -144,17 +144,18 @@ export default function Home() {
           speed={-0.3}
           sticky={{ start: 1.7, end: 1 }}
         >
-          <div className="bg-black bg-opacity-10 rounded-full ml-[70%] w-fit min-h-fit p-16 flex flex-col justify-center items-center">
-            <button
-              type="button"
+          <div className="bg-black bg-opacity-10 rounded-full ml-[60%] xl:ml-[70%] w-fit min-h-fit p-16 flex flex-col justify-center items-center">
+            <a
               className="w-fit flex bg-[#FFD966] text-white py-5 px-8 justify-center rounded-full font-montserrat text-lg font-semibold cursor-pointer mb-4"
+              href="" 
+              target="_blank"
             >
               Join Us
-            </button>
+            </a>
             <p className="font-montserrat text-xl font-semibold text-yellow-950 text-center">
               along with other
             </p>
-            <h2 className="font-montserrat text-5xl font-bold text-yellow-950 text-center my-2">
+            <h2 className="font-montserrat text-4xl xl:text-5xl font-bold text-yellow-950 text-center my-2">
               1,234,567
             </h2>
             <p className="font-montserrat text-xl font-semibold text-yellow-950 text-center">
@@ -357,10 +358,9 @@ export default function Home() {
           factor={1 / 2}
           className="flex pt-12 justify-center items-center"
         >
-          <div className="w-[300px] h-[300px] flex flex-col justify-center items-center bg-[#AB6B4F] rounded-lg p-6">
-            <div className="w-40 h-40 bg-[url('/assets/silva.jpg')] bg-cover bg-center bg-no-repeat rounded-full" />
-
-            <h4 className="font-montserrat font-medium text-xl text-white pt-4">
+          <div className="w-[200px] xl:w-[300px] h-[250px] xl:h-[300px] flex flex-col justify-center items-center bg-[#AB6B4F] rounded-lg p-6">
+            <div className="w-28 xl:w-40 h-28 xl:h-40 bg-[url('/assets/silva.jpg')] bg-cover bg-center bg-no-repeat rounded-full" />
+            <h4 className="font-montserrat font-medium text-xl text-white text-center pt-4">
               Veronica Silva
             </h4>
           </div>
@@ -371,15 +371,15 @@ export default function Home() {
           factor={1 / 2}
           className="w-full flex flex-row justify-around"
         >
-          <div className="w-[300px] h-[300px] flex flex-col justify-center items-center bg-[#8FAADC] rounded-lg p-6">
-            <div className="w-40 h-40 bg-[url('/assets/vergara.png')] bg-cover bg-center bg-no-repeat rounded-full" />
-            <h4 className="font-montserrat font-medium text-xl text-white pt-4">
+          <div className="w-[200px] xl:w-[300px] h-[250px] xl:h-[300px] flex flex-col justify-center items-center bg-[#8FAADC] rounded-lg p-6">
+            <div className="w-28 xl:w-40 h-28 xl:h-40 bg-[url('/assets/vergara.png')] bg-cover bg-center bg-no-repeat rounded-full" />
+            <h4 className="font-montserrat font-medium text-xl text-white text-center pt-4">
               Krishna Vergara
             </h4>
           </div>
-          <div className="w-[300px] h-[300px] flex flex-col justify-center items-center bg-[#A9D18E] rounded-lg p-6">
-          <div className="w-40 h-40 bg-[url('/assets/devera.png')] bg-cover bg-center bg-no-repeat rounded-full" />
-            <h4 className="font-montserrat font-medium text-xl text-white pt-4">
+          <div className="w-[200px] xl:w-[300px] h-[250px] xl:h-[300px] flex flex-col justify-center items-center bg-[#A9D18E] rounded-lg p-6">
+          <div className="w-28 xl:w-40 h-28 xl:h-40 bg-[url('/assets/devera.png')] bg-cover bg-center bg-no-repeat rounded-full" />
+            <h4 className="font-montserrat font-medium text-xl text-white text-center pt-4">
               Matt Klarenz De Vera
             </h4>
           </div>

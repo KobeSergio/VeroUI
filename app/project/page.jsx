@@ -1,14 +1,28 @@
 "use client";
 
 import React, { useRef, useState } from "react";
-import { Parallax, ParallaxLayer } from "@react-spring/parallax";
+import { Parallax, ParallaxLayer, IParallax} from "@react-spring/parallax";
 import { Carousel } from "@material-tailwind/react";
+import { BsChevronUp } from "react-icons/bs"
 
 export default function Project() {
+  const parallax = useRef();
+
   return (
     <div className="w-full h-full top-0 left-0 ">
+      
+      
       {/* 1st section */}
-      <Parallax pages={5}>
+      <Parallax ref={parallax} pages={5}>
+      <ParallaxLayer
+          offset={0.89}
+          speed={-1}
+          factor={6}
+          style={{ position: "absolute", zIndex: "40", marginLeft: "95%", cursor: "pointer"}}
+          onClick={() => parallax.current.scrollTo(0)}
+        >
+          <BsChevronUp  size={50} className="text-black rounded-full bg-white p-4"/>
+        </ParallaxLayer>
         <ParallaxLayer
           offset={0}
           speed={0}
@@ -115,12 +129,12 @@ export default function Project() {
         <ParallaxLayer
           offset={0.999}
           speed={1}
-          style={{ backgroundColor: "#1c0522", padding: "96px" }}
+          style={{ backgroundColor: "#1c0522", padding: "64px" }}
         >
           <h1 className="font-montserrat font-extrabold text-3xl text-white pb-4">
             The CVSU Move Katropa
           </h1>
-          <p className="font-montserrat font-normal text-xl text-white">
+          <p className="font-montserrat font-normal text-base xl:text-xl text-white">
             In a patriarchal society, where men dominate and rule our community,
             violence and abuses against women and girls are rampant. Undeniably,
             the masculinity ideology as part of our people&apos;s attitude may
@@ -153,7 +167,6 @@ export default function Project() {
             and refusal to have sex
           </p>
         </ParallaxLayer>
-
         {/* Footer */}
         <ParallaxLayer
           offset={4}
