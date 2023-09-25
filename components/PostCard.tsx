@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Firebase from "../lib/firebase";
 import { PostComment } from "../types/Comment";
 import { Spinner } from "./Spinner";
@@ -72,7 +72,7 @@ export default function PostCard({
 
   return (
     <div
-      className="w-[32%] h-full flex flex-col justify-between rounded-lg bg-opacity-5"
+      className="w-[49.5%] xl:w-[32%] h-full flex flex-col justify-between rounded-lg bg-opacity-5"
       style={{ backgroundColor: randomColor }}
     >
       <div className="flex flex-col p-5 pb-2.5">

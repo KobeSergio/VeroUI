@@ -7,20 +7,20 @@ import { Parallax, ParallaxLayer } from "@react-spring/parallax";
 import PostCard from "../../components/PostCard";
 import ReactPaginate from "react-paginate";
 import { SubmitPostModal } from "../../components/SubmitPostModal";
-import { Post } from "../../types/Post";
 import Firebase from "../../lib/firebase";
+import { Spinner } from "../../components/Spinner";
 
 const firebase = new Firebase();
 
 export default function DiscussionForum() {
   const router = useRouter();
 
-  const [posts, setPosts] = useState<Post[]>([] as Post[]);
+  const [posts, setPosts] = useState([]);
 
   // State variables for pagination
   const [currentPage, setCurrentPage] = useState(0);
-  const [paginatedPosts, setPaginatedPosts] = useState<Post[]>([] as Post[]);
-  const [pageCount, setPageCount] = useState<number>(0);
+  const [paginatedPosts, setPaginatedPosts] = useState([]);
+  const [pageCount, setPageCount] = useState(0);
 
   useEffect(() => {
     if (posts.length == 0) {
@@ -36,17 +36,25 @@ export default function DiscussionForum() {
   }, []);
 
   useEffect(() => {
+    setIsLoading(true);
     if (posts.length > 0) {
       const itemsPerPage = 3; // Change this value as needed
       const startIndex = currentPage * itemsPerPage;
       const endIndex = startIndex + itemsPerPage;
-      setPaginatedPosts(posts.slice(startIndex, endIndex));
+
+      // Sort posts by timestamp in descending order
+      const sortedPosts = [...posts].sort((a, b) =>
+        b.timestamp.localeCompare(a.timestamp)
+      );
+
+      setPaginatedPosts(sortedPosts.slice(startIndex, endIndex));
       setPageCount(Math.ceil(posts.length / itemsPerPage));
+      setIsLoading(false);
     }
   }, [currentPage, posts]);
 
   // Handle page change
-  const handlePageChange = (selectedPage: any) => {
+  const handlePageChange = (selectedPage) => {
     setCurrentPage(selectedPage.selected);
   };
 
@@ -146,20 +154,27 @@ export default function DiscussionForum() {
               Submit a Post
             </button>
           </div>
-          <div className="w-full flex flex-wrap justify-start gap-6">
-            {paginatedPosts.map((post: any, index) => (
-              <PostCard
-                key={index}
-                index={index}
-                setPosts={setPosts}
-                post_id={post.post_id}
-                subject={post.subject}
-                timestamp={post.timestamp}
-                message={post.message}
-                comments={post.comments}
-              />
-            ))}
-          </div>
+
+          {isLoading ? (
+            <div className="h-full flex justify-center items-center">
+              <Spinner />
+            </div>
+          ) : (
+            <div className="w-full flex flex-wrap justify-start gap-2 xl:gap-6">
+              {paginatedPosts?.map((post, index) => (
+                <PostCard
+                  key={index}
+                  index={index}
+                  setPosts={setPosts}
+                  post_id={post.post_id}
+                  subject={post.subject}
+                  timestamp={post.timestamp}
+                  message={post.message}
+                  comments={post.comments}
+                />
+              ))}
+            </div>
+          )}
         </div>
       </ParallaxLayer>
     </Parallax>
