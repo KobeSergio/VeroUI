@@ -19,15 +19,19 @@ export default function Home() {
   const parallax = useRef();
   const router = useRouter();
   const [viewerCount, setViewerCount] = useState(
-    typeof window !== 'undefined' ? parseInt(localStorage.getItem('viewerCount')) || 0 : 0
+    typeof window !== "undefined" ? parseInt(localStorage.getItem("viewerCount")) || 0 : 0
   );
   useEffect(() => {
-    if (typeof window !== 'undefined') {
+    const handleViewerCount = () => {
       const updatedViewerCount = viewerCount + 1;
       setViewerCount(updatedViewerCount);
-      localStorage.setItem('viewerCount', updatedViewerCount);
+      localStorage.setItem("viewerCount", updatedViewerCount);
+    };
+
+    if (typeof window !== "undefined" && localStorage.getItem("viewerCount") === null) {
+      handleViewerCount();
     }
-  }, []);
+  }, );
 
   return (
     <div className="w-full h-full top-0 left-0">

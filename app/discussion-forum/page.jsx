@@ -53,7 +53,7 @@ export default function DiscussionForum() {
       setPageCount(Math.ceil(posts.length / itemsPerPage));
       setIsLoading(false);
     }
-  }, [currentPage, posts.length]);
+  }, [posts, currentPage, posts.length]);
 
   // Handle page change
   const handlePageChange = (selectedPage) => {
