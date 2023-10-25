@@ -1,70 +1,182 @@
 "use client";
 
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { Parallax, ParallaxLayer, IParallax} from "@react-spring/parallax";
 import { Carousel } from "@material-tailwind/react";
-import { BsChevronUp } from "react-icons/bs"
+import { BsChevronDown, BsChevronLeft, BsChevronUp} from "react-icons/bs"
+import { useRouter } from "next/navigation";
+import { useMediaQuery } from 'react-responsive';
+import {Image} from 'next/image';
+
+
 
 export default function Project() {
   const parallax = useRef();
+  const router = useRouter();
+  const isMobile = useMediaQuery({ query: '(max-width: 768px)' });
+
+  const [currentPage, setCurrentPage] = useState(0); // Assuming the initial page is 1
+
+  const handleIncrement = () => {
+    if (currentPage < 7) {
+      setCurrentPage(currentPage + 1);
+      parallax.current.scrollTo(currentPage + 1); // Adjust this line based on how you need to handle the scrolling
+    }
+  };
+
+  const handleDecrement = () => {
+    if (currentPage > 0) {
+      setCurrentPage(currentPage - 1);
+      parallax.current.scrollTo(currentPage - 1); // Adjust this line based on how you need to handle the scrolling
+    }
+  };
+
+
 
   return (
+    
     <div className="w-full h-full top-0 left-0 ">
       
       
       {/* 1st section */}
-      <Parallax ref={parallax} pages={5}>
+      
+      
+      <Parallax ref={parallax} pages={8}>
+  <ParallaxLayer
+    offset={0}
+    speed={-1}
+    style={{
+      position: "absolute",
+      zIndex: "10",
+      marginLeft: isMobile ? "2%" : "5%",
+      marginTop: isMobile ? "1%" : "3%", 
+    }}
+  >
+    <BsChevronLeft
+      size={isMobile ? 30 : 50}
+      className="text-black rounded-full bg-white p-4 cursor-pointer"
+      onClick={() => router.push("/")}
+
+    />
+  </ParallaxLayer>
+
+
       <ParallaxLayer
           offset={0.89}
           speed={-1}
-          factor={6}
-          style={{ position: "absolute", zIndex: "40", marginLeft: "95%", cursor: "pointer"}}
-          onClick={() => parallax.current.scrollTo(0)}
+          style={{ position: "absolute", zIndex: "150", marginLeft: "95%", cursor: "pointer"}}
+          onClick={handleDecrement}
         >
           <BsChevronUp  size={50} className="text-black rounded-full bg-white p-4"/>
-        </ParallaxLayer>
+          
+       </ParallaxLayer>
+       <ParallaxLayer
+          offset={0.89}
+          speed={-1}
+          style={{ position: "absolute", zIndex: "100", marginLeft: "92%", cursor: "pointer"}}
+          onClick={handleIncrement}
+          
+        >
+          <BsChevronDown  size={50} className="text-black rounded-full bg-white p-4"/>
+          
+       </ParallaxLayer>
+       
         <ParallaxLayer
           offset={0}
           speed={0}
-          factor={6}
+          factor={8}
           style={{
             backgroundImage:
               "url(/assets/star.png), linear-gradient(#2b1055, #7597de)",
             backgroundSize: "contain",
-            backgroundRepeat: "repeat",
+            backgroundRepeat: "repeat", 
           }}
-        />
-        <ParallaxLayer offset={0} speed={-0.7} factor={1}>
-          <h1 className="font-montserrat font-extrabold text-[100px] text-center text-white py-16">
-            Move Katropa
+        />        
+<ParallaxLayer offset={0} speed={-0.7} factor={1}>
+  <h1 className="font-montserrat font-extrabold text-4xl md:text-5xl lg:text-8xl text-center text-white py-8 md:py-12 lg:py-16" style={{ marginTop: "50px" }}>
+    Move Katropa
+  </h1>
+
+</ParallaxLayer>
+<ParallaxLayer
+  offset={0}
+  speed={1}
+  style={{
+    backgroundImage: "url(/assets/dd.png)",
+    backgroundSize: "contain",
+    backgroundRepeat: "no-repeat",
+    minHeight: "200px", backgroundPosition: "bottom"
+  }}
+/>
+
+<ParallaxLayer
+  offset={0}
+  speed={0.3}
+  style={{
+    backgroundImage: "url(/assets/b2.png)",
+    backgroundSize: "contain",
+    backgroundRepeat: "no-repeat",
+    minHeight: "200px", backgroundPosition: "bottom"
+  }}
+/>
+
+
+        {/* 5th section */}
+         {/* 4th section */}
+         <ParallaxLayer
+          offset={4}
+          speed={0}
+          factor={1/2}
+          
+          style={{
+            padding: "96px",
+            textAlign: "center",
+          }}
+        >
+          <h1 className="font-montserrat font-extrabold text-3xl text-white pt-4" style={{ marginTop: '650px' }}>
+    We can promote healthy coping mechanisms toward fostering a supportive environment.
+</h1>
+
+          </ParallaxLayer>
+          <ParallaxLayer
+          offset={6}
+          speed={0.1}
+          factor={1}
+          style={{
+            padding: "96px",
+            textAlign: "center",
+          }}
+        >
+          <h1 className="font-montserrat font-extrabold text-3xl text-white pt-4">
+            Together Let us break down the gender-based barriers{" "}
           </h1>
+        
         </ParallaxLayer>
         <ParallaxLayer
-          offset={0}
-          speed={-0.01}
-          style={{
-            backgroundImage: "url(/assets/33.png)",
-            backgroundSize: "contain",
-            backgroundPosition: "center",
-          }}
-        ></ParallaxLayer>
-        <ParallaxLayer
-          offset={0}
-          speed={0.3}
-          style={{
-            backgroundImage: "url(/assets/55.png)",
-            backgroundSize: "cover",
-          }}
+          offset={6}
+          speed={0.1}
+          style={{ backgroundImage: "url(/assets/hn3.png)", backgroundSize: "50%",
+          backgroundPosition: "left", marginTop: "50px"}}
+          
         />
-        
-        {/* 5th section */}
+    
+<ParallaxLayer
+  offset={6}
+  speed={-0.1}
+  style={{ backgroundImage: "url(/assets/hn1.png)", backgroundSize:"50%",
+  backgroundPosition: "right", }}/>
+
+
+
+        {/* ... (remaining code remains unchanged) */}
+      
         <ParallaxLayer
-          offset={3}
+          offset={5}
           speed={0}
           style={{backgroundColor: "#7597de"}}
         />
         <ParallaxLayer
-          offset={2.9}
+          offset={5}
           speed={-0.1}
           style={{
             padding: "96px",
@@ -74,15 +186,92 @@ export default function Project() {
             justifyContent: "center",
           }}
         >
-          <h1 className="font-montserrat font-extrabold text-3xl text-white pb-4">
-            ...by integrating GAD in ALL of its programs.
-          </h1>
+          <h1 className="font-montserrat font-extrabold text-3xl text-white pb-4 text-center">
+          By amplifying the voices of male advocates for gender equality, we can create a more inclusive dialogue that addresses the unique challenges faced by men.          </h1>
           <Carousel loop={true} autoplay={true} className="">
             <div className="w-full h-full bg-[url('/assets/a1.png')] bg-contain bg-no-repeat bg-bottom"></div>
             <div className="w-full h-full bg-[url('/assets/a2.png')] bg-contain bg-no-repeat bg-bottom"></div>
             <div className="w-full h-full bg-[url('/assets/a3.png')] bg-contain bg-no-repeat bg-bottom"></div>
           </Carousel>
         </ParallaxLayer>
+        
+        <ParallaxLayer offset={4} speed={0.8} 
+style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+  <div className="w-[100%] h-[100%] bg-[url('/assets/umb1.png')] bg-no-repeat bg-center" />
+</ParallaxLayer>
+
+
+<ParallaxLayer
+  offset={4}
+  speed={-0.2}
+  
+  style={{
+    padding: "96px",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    flexDirection: "column", // Set the flex direction to column
+    textAlign: "center",
+    
+  }}
+>
+  <h1 className="font-montserrat font-extrabold text-4xl text-white pt-4">
+    SAFE SPACE
+  </h1>
+
+</ParallaxLayer>
+
+
+
+<ParallaxLayer offset={3} speed={0} />
+<ParallaxLayer
+  offset={3.1}
+  speed={-0.1}
+  style={{
+    padding: '96px',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    flexDirection: 'column', // Set the flex direction to column
+    position: 'relative', // Set position to relative to allow for positioning of elements
+  }}
+>
+  <div
+    style={{
+      position: 'absolute',
+      width: '100vw', // Set width to 100vw for full viewport width
+      height: '100vh', // Set height to 100vh for full viewport height
+      top: 0,
+      left: 0,
+      zIndex: -1, // Set a negative z-index to place it behind other elements
+      overflow: 'hidden', // Hide overflowing content
+    }}
+  >
+    {/* Video or GIF component here */}
+    {/* For example, for a video */}
+    <video autoPlay loop muted style={{ width: '100%', height: '80%', objectFit: 'cover' }}>
+      <source src="/assets/vid3.mp4" type="video/mp4" />
+      Your browser does not support the video tag.
+    </video>
+  </div>
+
+  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column' }}>
+  <h1
+    className="font-montserrat font-extrabold text-3xl text-white pb-4"
+    style={{
+      textAlign: 'center',
+      marginTop: '400px',
+      textShadow: '2px 2px 4px rgba(0,0,0,0.4)', // Add a shadow effect to the text
+    }}
+  >
+    Gender inequality in the Philippines has been a serious and complicated problem in the country.
+  </h1>
+
+
+  </div>
+</ParallaxLayer>
+
+
 
         {/* 4th section */}
         <ParallaxLayer
@@ -90,24 +279,30 @@ export default function Project() {
           speed={0}
         />
         <ParallaxLayer
-          offset={1.9}
+          offset={2}
           speed={-0.1}
           style={{
             padding: "96px",
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
+            flexDirection: "column", // Set the flex direction to column
+
           }}
-        >
-          <h1 className="font-montserrat font-extrabold text-3xl text-white pb-4">
-            Since then, CvSU MOVE & KATROPA institutionalized & supported the
-            university quest on VAW-free community...
-          </h1>
+        >  
+        
+  
+  </ParallaxLayer>
+        <ParallaxLayer offset={2} speed={0.8}>
+          <div className="w-[80%] h-[80%] bg-[url('/assets/text.png')] bg-contain bg-no-repeat bg-center opacity-100 ml-[10%]" />
         </ParallaxLayer>
+        
+
+
         
         {/* 3rd section */}
         <ParallaxLayer
-          offset={0.99}
+          offset={1}
           speed={0}
         />
         <ParallaxLayer
@@ -118,23 +313,45 @@ export default function Project() {
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
+            flexDirection: "column", // Set the flex direction to column
+
           }}
         >
-          <h1 className="font-montserrat font-extrabold text-3xl text-white pb-4">
-            CVSU MOVE KATROPA WERE ESTABLISHED ON 2017
-          </h1>
+   
+          <h1 className="font-montserrat font-extrabold text-3xl text-white pb-4 mt-5">
+          Men often face social pressure to uphold typical notions of masculinity          </h1>       
+  <image
+    src="/assets/sad.png" // Replace 'path_to_your_image.jpg' with the actual path to your image
+    alt="sad"
+    style={{ maxWidth: "100%", maxHeight: "100%", marginTop:"5%"}} // Adjust the style according to your requirements
+  />
         </ParallaxLayer>
+        <ParallaxLayer offset={1.8} speed={0.8}>
+          <div className="w-[20%] h-[20%] bg-[url('/assets/sad.png')] bg-contain bg-no-repeat opacity-10 block ml-[70%] " />
+          <div className="w-[20%] h-[20%] bg-[url('/assets/sad.png')] bg-contain bg-no-repeat opacity-20 block ml-[50%] " />
+        </ParallaxLayer>
+        <ParallaxLayer offset={1.5} speed={0.8}>
+          <div className="w-[20%] h-[20%] bg-[url('/assets/sad.png')] bg-contain bg-no-repeat opacity-10 block ml-[20%]" />
+          <div className="w-[20%] h-[20%] bg-[url('/assets/sad.png')] bg-contain bg-no-repeat opacity-20 block ml-[10%]" />
+        </ParallaxLayer>
+      
 
           {/* 2nd section */}
         <ParallaxLayer
           offset={0.999}
           speed={1}
-          style={{ backgroundColor: "#1c0522", padding: "64px" }}
+          style={{
+            backgroundColor: "#1c0522",
+            padding: "5%",
+            backgroundSize: "contain",
+            backgroundRepeat: "no-repeat",
+            minHeight: "200px",
+          }}
         >
-          <h1 className="font-montserrat font-extrabold text-3xl text-white pb-4">
-            The CVSU Move Katropa
-          </h1>
-          <p className="font-montserrat font-normal text-base xl:text-xl text-white">
+         <h1 className="font-montserrat font-extrabold text-2xl md:text-3xl lg:text-4xl text-white pb-2 md:pb-4">
+    The CVSU Move Katropa
+  </h1>
+  <p className="font-montserrat font-normal text-sm md:text-base lg:text-xl text-white">
             In a patriarchal society, where men dominate and rule our community,
             violence and abuses against women and girls are rampant. Undeniably,
             the masculinity ideology as part of our people&apos;s attitude may
@@ -169,12 +386,43 @@ export default function Project() {
         </ParallaxLayer>
         {/* Footer */}
         <ParallaxLayer
-          offset={4}
-          speed={1}
-          style={{ backgroundImage: "url(/assets/dd.png)", backgroundSize: "contain",
-          backgroundPosition: "center", }}
-        />
-      </Parallax>
-    </div>
+  offset={7.1}
+  speed={0.1}
+  factor={1}
+  style={{
+    padding: "96px",
+    textAlign: "center",
+    zIndex: 100, // Make sure the z-index is high enough to bring the element to the front
+  }}
+>
+  <h1 className="font-montserrat font-extrabold text-3xl text-white pt-4">
+    Join the Move Katropa Community and show your support!
+  </h1>
+  <h2 className="font-montserrat font-extrabold text-3xl text-white pt-4">
+    Visit our{" "}
+    <a
+      href="https://www.facebook.com/CvSUGADResourceCenter"
+      style={{ textDecoration: "underline", color: "white", cursor: "pointer" }}
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      Facebook
+    </a>{" "}
+    page for more information.
+  </h2>
+</ParallaxLayer>
+
+<ParallaxLayer
+  offset={7}
+  speed={1}
+  style={{
+    backgroundImage: "url(/assets/dd.png)",
+    backgroundSize: "contain",
+    backgroundRepeat: "no-repeat",
+    minHeight: "200px", backgroundPosition: "bottom"
+  }}
+/>
+</Parallax>
+</div>
   );
-}
+            }

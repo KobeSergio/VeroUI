@@ -5,7 +5,7 @@ const inter = Inter({ subsets: ['latin'] })
 
 export const metadata = {
   title: 'Equal Perspectives',
-  description: 'A Parallax Journey Through Gender Equity on Men',
+  description: 'A Parallax Journey Through Gender Equality on Men',
 }
 
 export default function RootLayout({ children }) {

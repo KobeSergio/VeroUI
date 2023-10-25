@@ -81,7 +81,10 @@ export function SubmitPostModal({ isOpen, setter, setPosts }: any) {
           </IconButton>
         </DialogHeader>
         <DialogBody divider>
-          <div className="grid gap-6">
+        <p className="text-[#F2184E]">
+      Use no language that is offensive to others or could be interpreted as such!
+      </p>
+          <div className="grid gap-6 mt-4">
             <Input
               label="Subject"
               className="font-montserrat font-medium"
@@ -96,7 +99,13 @@ export function SubmitPostModal({ isOpen, setter, setPosts }: any) {
               className="font-montserrat font-medium"
               maxLength={150}
               onChange={(e) => setMessage(e.target.value)}
+              value={message}
+
             />
+            <p>
+        {message.length}/150 characters
+      </p>
+    
           </div>
         </DialogBody>
         <DialogFooter>

@@ -10,10 +10,12 @@ import { SubmitPostModal } from "../../components/SubmitPostModal";
 import Firebase from "../../lib/firebase";
 import { Spinner } from "../../components/Spinner";
 
+
 const firebase = new Firebase();
 
 export default function DiscussionForum() {
   const router = useRouter();
+  const [showPrivacyPrompt, setShowPrivacyPrompt] = useState(true);
 
   const [posts, setPosts] = useState([]);
 
@@ -33,25 +35,25 @@ export default function DiscussionForum() {
           console.log(error);
         });
     }
-  }, []);
+  }, [posts.length]);
 
   useEffect(() => {
     setIsLoading(true);
     if (posts.length > 0) {
-      const itemsPerPage = 3; // Change this value as needed
+      const itemsPerPage = 10; // Change this value as needed
       const startIndex = currentPage * itemsPerPage;
       const endIndex = startIndex + itemsPerPage;
 
       // Sort posts by timestamp in descending order
       const sortedPosts = [...posts].sort((a, b) =>
-        b.timestamp.localeCompare(a.timestamp)
+      new Date(b.timestamp) - new Date(a.timestamp)
       );
 
       setPaginatedPosts(sortedPosts.slice(startIndex, endIndex));
       setPageCount(Math.ceil(posts.length / itemsPerPage));
       setIsLoading(false);
     }
-  }, [currentPage, posts]);
+  }, [currentPage, posts.length]);
 
   // Handle page change
   const handlePageChange = (selectedPage) => {
@@ -68,10 +70,51 @@ export default function DiscussionForum() {
       setShowPostModal(false);
     }, 2000);
   };
+  const handleAcceptPrivacy = () => {
+    setShowPrivacyPrompt(false);
+  };
+  return ( 
+  <div>
+    {showPrivacyPrompt && (
+      <div className="modal">
+      <div className="modal-content">
+        <h2>Data Privacy Compliance</h2>
+        <p>
+  We care about your data and want to ensure that you have control over how it&apos;s used.
+</p>
 
-  return (
-    <Parallax pages={1.5}>
-      <ParallaxLayer offset={0} speed={0} factor={1.5}>
+        <p>
+  At this Discussion Forum, we take your privacy seriously, and we are committed to protecting your personal information. Before you engage with our platform, we want to ensure that you understand how we handle your data and your rights regarding your personal information.
+</p>
+        <div className="privacy-policy-section">
+          <h1>1. Data Collection</h1>
+          <p>We do not collect personally identifiable information without your consent.</p>
+    
+          <h1>2. Data Usage</h1>
+          <p>Your data is used to enable you to post, comment, and interact on our platform. Your data may be used to improve our services and enhance your experience of our Discussion Forum.</p>
+    
+          <h1>3. Data Security</h1>
+          <p>Access to your data is restricted to authorized personnel only.</p>
+    
+          <h1>4. Data Sharing</h1>
+          <p>We do not share your data with third parties for marketing purposes. In the interest of maintaining anonymity, we discourage sharing of personally identifiable information in public posts. We may share your data with law enforcement agencies if required by law.</p>
+    
+          <p>By using the Freedom Wall, you consent to this privacy policy and the processing of your data as described herein. Please take a moment to review this privacy policy carefully. By continuing to use our platform, you acknowledge that you have read and accepted this data privacy compliance notice. If you have any questions or concerns, please contact our support team.</p>
+        </div>
+        <div className="modal-buttons">
+          <button onClick={handleAcceptPrivacy}>Accept</button>
+        
+        </div>
+      </div>
+    </div>
+    
+    )}
+    {!showPrivacyPrompt && (
+      <div>
+        {/* Your existing JSX code for the Parallax and other components */}
+      
+    <Parallax pages={2.5}>
+      <ParallaxLayer offset={0} speed={0} factor={2.5}>
         <div className="w-full h-full bg-gradient-to-b from-white via-yellow-50 to-yellow-50"></div>
       </ParallaxLayer>
       <ParallaxLayer offset={0.1} speed={-0.6}>
@@ -107,23 +150,27 @@ export default function DiscussionForum() {
         <div className="w-[10%] h-[20%] bg-[url('/assets/male-symbol.png')] bg-contain bg-no-repeat opacity-5 block ml-[78%]" />
       </ParallaxLayer>
       <ParallaxLayer offset={0} speed={0} factor={1 / 2}>
-        <div className="flex flex-row gap-4 px-24 py-16">
+        <div className="flex flex-row gap-2 px-10 py-10">
           <BsArrowLeft
             size={24}
             className="cursor-pointer"
             onClick={() => router.push("/")}
           />
-          <div className="flex flex-col justify-center items-center gap-2">
-            <h1 className="font-montserrat font-bold text-4xl">
-              Discussion Forum
-            </h1>
-            <h6 className="font-montserrat font-medium text-lg text-black text-center">
-              Engage with our community &ndash; whether you&apos;re posting a
-              new topic or diving into existing conversations, your voice
-              matters here.
-            </h6>
-          </div>
-        </div>
+                  </div>
+
+        
+                  <div className="flex flex-col justify-center items-center gap-2">
+  <h1 className="font-montserrat font-bold text-2xl md:text-4xl text-center">
+    Discussion Forum
+  </h1>
+  <h6 className="font-montserrat font-medium text-sm md:text-lg text-black text-center">
+    Engage with our community &ndash; whether you&apos;re posting a
+    new topic or diving into existing conversations, your voice
+    matters here.
+  </h6>
+</div>
+
+
       </ParallaxLayer>
       <ParallaxLayer offset={0.2} speed={-0.25}>
         <SubmitPostModal
@@ -133,50 +180,59 @@ export default function DiscussionForum() {
           setPosts={setPosts}
           isLoading={isLoading}
         />
-        <div className="flex flex-col gap-4 px-24 py-6">
-          <div className="flex flex-row justify-between items-center">
-            <ReactPaginate
-              previousLabel={"Previous"}
-              nextLabel={"Next"}
-              breakLabel={"..."}
-              pageCount={pageCount}
-              marginPagesDisplayed={2}
-              pageRangeDisplayed={5}
-              onPageChange={handlePageChange}
-              containerClassName={"pagination"}
-              activeClassName={"active"}
-            />
-            <button
-              type="button"
-              className="w-fit flex bg-[#7163DE] text-white py-4 px-8 justify-center rounded-full font-montserrat text-base font-semibold cursor-pointer mb-4"
-              onClick={() => setShowPostModal(true)}
-            >
-              Submit a Post
-            </button>
-          </div>
+    <div className="flex flex-col items-center gap-4 px-8 md:px-24 py-4 md:py-6 md:mt-6">
+  <button
+    type="button"
+    className="w-fit flex bg-[#7163DE] text-white py-3 px-6 md:py-4 md:px-8 justify-center rounded-full font-montserrat text-sm md:text-base font-semibold cursor-pointer mb-4"
+    onClick={() => setShowPostModal(true)}
+  >
+    Submit a Post
+  </button>
+</div>
+
+
 
           {isLoading ? (
             <div className="h-full flex justify-center items-center">
               <Spinner />
             </div>
           ) : (
-            <div className="w-full flex flex-wrap justify-start gap-2 xl:gap-6">
-              {paginatedPosts?.map((post, index) => (
-                <PostCard
-                  key={index}
-                  index={index}
-                  setPosts={setPosts}
-                  post_id={post.post_id}
-                  subject={post.subject}
-                  timestamp={post.timestamp}
-                  message={post.message}
-                  comments={post.comments}
-                />
-              ))}
-            </div>
+            <div className="w-full flex justify-center flex-wrap gap-4 xl:gap-6 mt-10">
+  {paginatedPosts?.slice(0, 10).map((post, index) => (
+    <PostCard
+    key={index}
+    index={index}
+    setPosts={setPosts}
+    post_id={post.post_id}
+    subject={post.subject}
+    timestamp={post.timestamp}
+    message={post.message.length > 150 ? `${post.message.substring(0, 100)}...` : post.message}
+    comments={post.comments}
+  />
+  
+  ))}
+</div>
+
+            
           )}
+<div className="flex justify-center items-center mt-10">
+  <ReactPaginate
+    previousLabel={"Previous"}
+    nextLabel={"Next"}
+    breakLabel={"..."}
+    pageCount={pageCount}
+    marginPagesDisplayed={2}
+    pageRangeDisplayed={5}
+    onPageChange={handlePageChange}
+    containerClassName={"pagination"}
+    activeClassName={"active"}
+  />
+
+
+
+
         </div>
       </ParallaxLayer>
-    </Parallax>
+    </Parallax></div>)}</div>
   );
 }
