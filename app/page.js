@@ -19,19 +19,15 @@ export default function Home() {
   const parallax = useRef();
   const router = useRouter();
   const [viewerCount, setViewerCount] = useState(
-    typeof window !== "undefined" ? parseInt(localStorage.getItem("viewerCount")) || 0 : 0
+    typeof window !== 'undefined' ? parseInt(localStorage.getItem('viewerCount')) || 0 : 0
   );
   useEffect(() => {
-    const handleViewerCount = () => {
+    if (typeof window !== 'undefined') {
       const updatedViewerCount = viewerCount + 1;
       setViewerCount(updatedViewerCount);
-      localStorage.setItem("viewerCount", updatedViewerCount);
-    };
-
-    if (typeof window !== "undefined" && localStorage.getItem("viewerCount") === null) {
-      handleViewerCount();
+      localStorage.setItem('viewerCount', updatedViewerCount);
     }
-  }, );
+  }, []);
 
   return (
     <div className="w-full h-full top-0 left-0">
@@ -43,10 +39,9 @@ export default function Home() {
         </ParallaxLayer>
         <ParallaxLayer offset={0}>
   <div className="w-full h-full flex flex-col items-center mt-16">
-  <h1 className="font-montserrat font-extrabold lg:text-[50] text-[60px] xt-[49x] text-center text-[#5284C0]">
-  Equal Perspectives
-</h1>
-
+    <h1 className="font-montserrat font-extrabold lg:text-[50] text-[60px] xt-[49x] text-center text-[#5284C0]">
+      Equal Perspectives
+    </h1>
     <h3 className="font-montserrat font-normal text-[20px] text-[#4874A8]">
       A Parallax Journey Through Gender Equality on Men
     </h3>
@@ -349,12 +344,13 @@ export default function Home() {
           <div className="w-[5%] h-[10%] bg-[url('/assets/male-symbol.png')] bg-contain bg-no-repeat opacity-5 ml-[30%] rotate-6" />
         </ParallaxLayer>
         <ParallaxLayer offset={3.9} speed={0} sticky={{ start: 3.9, end: 1 }}>
-          <div className="bg-black bg-opacity-10 rounded-lg py-4 flex flex-col justify-center items-center">
-          <h1 className="font-montserrat font-extrabold text-center text-3xl lg:text-4xl text-black pb-4">
+        <div className="bg-black bg-opacity-10 rounded-lg py-4 flex flex-col justify-center items-center">
+        <h1 className="font-montserrat font-extrabold text-center text-3xl lg:text-4xl text-black pb-4">
               Partners
             </h1>
             <Marquee>
-            <div className="marquee-container">
+            <div className="marquee-container flex items-center">
+            <Marquee direction="left">
 
               <Image
                 src={"/assets/move.png"}
@@ -460,25 +456,11 @@ export default function Home() {
                 height={100}
                 alt=""
                 className="mr-12 sm:mr-12"
-              />
+              /></Marquee>
               </div>
             </Marquee>
           </div>
-          <style jsx>{`
-  @media (max-width: 768px) {
-    .mr-8 {
-      margin-right: 8px; // Adjust margin for smaller screens
-    }
-    .lg\:text-4xl {
-      font-size: 18px; // Adjust font size for smaller screens
-    }
-    .marquee-container {
-      display: flex;
-      flex-direction: column; // Adjust flex direction for smaller screens
-      align-items: center;
-    }
-  }
-`}</style>
+
         </ParallaxLayer>
 
         {/* Project Creators */}

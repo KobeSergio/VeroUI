@@ -35,7 +35,7 @@ export default function DiscussionForum() {
           console.log(error);
         });
     }
-  }, [posts.length]);
+  }, []);
 
   useEffect(() => {
     setIsLoading(true);
@@ -53,7 +53,7 @@ export default function DiscussionForum() {
       setPageCount(Math.ceil(posts.length / itemsPerPage));
       setIsLoading(false);
     }
-  }, [posts, currentPage, posts.length]);
+  }, [currentPage, posts]);
 
   // Handle page change
   const handlePageChange = (selectedPage) => {
@@ -80,12 +80,11 @@ export default function DiscussionForum() {
       <div className="modal-content">
         <h2>Data Privacy Compliance</h2>
         <p>
-  We care about your data and want to ensure that you have control over how it&apos;s used.
-</p>
-
+          We care about your data and want to ensure that you have control over how it&apos;s used.
+        </p>
         <p>
-  At this Discussion Forum, we take your privacy seriously, and we are committed to protecting your personal information. Before you engage with our platform, we want to ensure that you understand how we handle your data and your rights regarding your personal information.
-</p>
+          At this Discussion Forum, we take your privacy seriously, and we are committed to protecting your personal information. Before you engage with our platform, we want to ensure that you understand how we handle your data and your rights regarding your personal information.
+        </p>
         <div className="privacy-policy-section">
           <h1>1. Data Collection</h1>
           <p>We do not collect personally identifiable information without your consent.</p>

@@ -6,7 +6,7 @@ import { Carousel } from "@material-tailwind/react";
 import { BsChevronDown, BsChevronLeft, BsChevronUp} from "react-icons/bs"
 import { useRouter } from "next/navigation";
 import { useMediaQuery } from 'react-responsive';
-import {Image} from 'next/image';
+import Image from "next/image";
 
 
 
@@ -320,11 +320,13 @@ style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
    
           <h1 className="font-montserrat font-extrabold text-3xl text-white pb-4 mt-5">
           Men often face social pressure to uphold typical notions of masculinity          </h1>       
-  <image
+          <Image
     src="/assets/sad.png" // Replace 'path_to_your_image.jpg' with the actual path to your image
     alt="sad"
-    style={{ maxWidth: "100%", maxHeight: "100%", marginTop:"5%"}} // Adjust the style according to your requirements
-  />
+    style={{ maxWidth: "100%", maxHeight: "100%", marginTop: "5%"}} // Adjust the style according to your requirements
+/>
+
+
         </ParallaxLayer>
         <ParallaxLayer offset={1.8} speed={0.8}>
           <div className="w-[20%] h-[20%] bg-[url('/assets/sad.png')] bg-contain bg-no-repeat opacity-10 block ml-[70%] " />
