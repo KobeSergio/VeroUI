@@ -26,18 +26,21 @@ export default function DiscussionForum() {
 
   useEffect(() => {
     if (posts.length == 0) {
-      firebase
-        .getPosts()
-        .then((posts) => {
-          setPosts(posts);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+      firebase.getPosts().then((posts) => {
+        if (posts.length > 0) {
+          const sortedPosts = [...posts].sort((a, b) => {
+            const dateA = new Date(a.timestamp).getTime();
+            const dateB = new Date(b.timestamp).getTime();
+            return dateB - dateA;
+          });
+          setPosts(sortedPosts);
+        }
+      });
     }
   }, [posts.length]);
 
   useEffect(() => {
+<<<<<<< HEAD
     setIsLoading(true);
     if (posts.length > 0) {
       const itemsPerPage = 10; // Change this value as needed
@@ -54,6 +57,21 @@ export default function DiscussionForum() {
       setIsLoading(false);
     }
   }, [currentPage, posts.length]);
+=======
+    // Calculate the number of pages based on the number of posts per page
+    const postsPerPage = 3; // Adjust this value as needed
+    const pageCount = Math.ceil(posts.length / postsPerPage);
+    setPageCount(pageCount);
+
+    // Calculate the start and end indices for the current page
+    const startIndex = currentPage * postsPerPage;
+    const endIndex = startIndex + postsPerPage;
+
+    // Get the posts for the current page
+    const currentPaginatedPosts = posts.slice(startIndex, endIndex);
+    setPaginatedPosts(currentPaginatedPosts);
+  }, [currentPage, posts]);
+>>>>>>> 86da11ef56d782b9caf579177a1ea6aa194dbfdf
 
   // Handle page change
   const handlePageChange = (selectedPage) => {

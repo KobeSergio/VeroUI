@@ -38,7 +38,12 @@ export function SubmitPostModal({ isOpen, setter, setPosts }: any) {
       };
       await firebase.createPost(newPost);
       const posts = await firebase.getPosts();
-      setPosts(posts);
+      const sortedPosts = [...posts].sort((a: any, b: any) => {
+        const dateA = new Date(a.timestamp).getTime();
+        const dateB = new Date(b.timestamp).getTime();
+        return dateB - dateA;
+      });
+      setPosts(sortedPosts);
 
       setIsLoading(false);
       setter(false);

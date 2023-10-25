@@ -61,9 +61,14 @@ export default function PostCard({
 
     await firebase.addComment(post_id, newComments);
     const posts = await firebase.getPosts();
+    const sortedPosts = [...posts].sort((a: any, b: any) => {
+      const dateA = new Date(a.timestamp).getTime();
+      const dateB = new Date(b.timestamp).getTime();
+      return dateB - dateA;
+    });
+    setPosts(sortedPosts);
     setComment("");
     setIsLoading(false);
-    setPosts(posts);
   };
 
   const toggleSeeMore = () => {
